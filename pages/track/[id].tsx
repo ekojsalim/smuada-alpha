@@ -80,6 +80,7 @@ const TrackListPage = () => {
 
   // @ts-ignore
   const prices = data?.list.list_products
+  // @ts-ignore
     .map((lp) => {
       const p = lp.product;
       // @ts-ignore
@@ -92,12 +93,8 @@ const TrackListPage = () => {
       });
     })
     .flat()
+	// @ts-ignore
     .sort((a, b) => b.time - a.time);
-
-  function getAvg(grades) {
-    const total = grades.reduce((acc, c) => acc + c, 0);
-    return total / grades.length;
-  }
 
 //   console.log(prices.map((v) => v.price.slice(2)));
 
@@ -144,9 +141,9 @@ const TrackListPage = () => {
                 <Tbody>
                   {
                     // @ts-ignore
-                    data.list.track_requests.map((v) => {
+                    data.list.track_requests.map((v, idx) => {
                       return (
-                        <Tr>
+                        <Tr key={"tr-" + idx}>
                           <Td>{v.id}</Td>
                           <Td>{v.created_at}</Td>
                           <Td>{v.status}</Td>
@@ -179,9 +176,9 @@ const TrackListPage = () => {
                 <Tbody>
                   {
                     // @ts-ignore
-                    prices.map((v) => {
+                    prices.map((v, idx) => {
                       return (
-                        <Tr>
+                        <Tr key={"tr2-" + idx}>
                           <Td>{v.name}</Td>
                           <Td>{v.time}</Td>
                           <Td>{v.price.replaceAll("$", "Rp.")}</Td>

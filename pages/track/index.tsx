@@ -61,10 +61,6 @@ const LISTS_QUERY = gql`
 const TrackPage = () => {
   const { getToken, isLoaded, isSignedIn, userId } = useAuth();
 
-  if (!isLoaded || !isSignedIn) {
-    return null;
-  }
-
   const { loading, error, data } = useQuery(LISTS_QUERY);
   const [createList, d] = useMutation(CREATE_LIST_MUTATION, {
     refetchQueries: [{ query: LISTS_QUERY }],
@@ -84,6 +80,10 @@ const TrackPage = () => {
 
     setSearch("");
   };
+
+  if (!isLoaded || !isSignedIn) {
+    return null;
+  }
 
   return (
     <Box as="main" minHeight="100vh">
